@@ -378,7 +378,7 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
             break;
         case ESP_GATTS_READ_EVT:
             ESP_LOGI(GATTS_TABLE_TAG, "ESP_GATTS_READ_EVT");
-             esp_ble_gatts_send_response(gatts_if, param->read.conn_id, param->read.trans_id, status, "hello");
+             esp_ble_gatts_send_response(gatts_if, param->read.conn_id, param->read.trans_id, ESP_GATT_OK, "hello");
             break;
         case ESP_GATTS_WRITE_EVT:
             if (!param->write.is_prep){

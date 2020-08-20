@@ -386,8 +386,8 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
                 write_char_data[i] = i % 256;
             }
             esp_ble_gattc_write_char( gattc_if,
-                                      heart_rate_profile_tab[idx].conn_id,
-                                      heart_rate_profile_tab[idx].char_handle,
+                                      heart_rate_profile_tab[PROFILE_APP_IDX].conn_id,
+                                      heart_rate_profile_tab[PROFILE_APP_IDX].char_handle,
                                       sizeof(write_char_data),
                                       write_char_data,
                                       ESP_GATT_WRITE_TYPE_RSP,

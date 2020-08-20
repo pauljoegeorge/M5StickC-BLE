@@ -388,11 +388,11 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
             ESP_LOGI(GATTS_TABLE_TAG, "GATT_READ_EVT, conn_id %d, trans_id %d, handle %d\n",  
               param->read.conn_id, param->read.trans_id, param->read.handle);  
 
-            uint8_t write_char_data[35];
-            for (int i = 0; i < sizeof(write_char_data); ++i)
-            {
-                write_char_data[i] = i % 256;
-            }
+            uint8_t write_char_data[35] = 0x06;
+            // for (int i = 0; i < sizeof(write_char_data); ++i)
+            // {
+            //     write_char_data[i] = i % 256;
+            // }
             esp_ble_gattc_write_char( gatts_if,
                                       heart_rate_profile_tab[PROFILE_APP_IDX].conn_id,
                                       heart_rate_profile_tab[PROFILE_APP_IDX].char_handle,

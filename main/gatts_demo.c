@@ -43,7 +43,7 @@
 #define PROFILE_NUM                 1
 #define PROFILE_APP_IDX             0
 #define ESP_APP_ID                  0x55
-#define SAMPLE_DEVICE_NAME          "ESP_GATTS_DEMO"
+#define SAMPLE_DEVICE_NAME          "DOOR_CHIME"
 #define SVC_INST_ID                 0
 
 /* The max length of characteristic value. When the GATT client performs a write or prepare write operation,
@@ -77,7 +77,7 @@ static uint8_t raw_adv_data[] = {
         /* service uuid */
         0x03, 0x03, 0xFF, 0x00,
         /* device name */
-        0x0f, 0x09, 'E', 'S', 'P', '_', 'G', 'A', 'T', 'T', 'S', '_', 'D','E', 'M', 'O'
+        0x0f, 0x09, 'D', 'O', 'O', 'R', '_', 'C', 'H', 'I', 'M', 'E'
 };
 static uint8_t raw_scan_rsp_data[] = {
         /* flags */
@@ -387,18 +387,6 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
         case ESP_GATTS_READ_EVT:
             ESP_LOGI(GATTS_TABLE_TAG, "GATT_READ_EVT, conn_id %d, trans_id %d, handle %d\n",  
                           param->read.conn_id, param->read.trans_id, param->read.handle);  
-            esp_gatt_rsp_t rsp;  
-            memset(&rsp, 0, sizeof(esp_gatt_rsp_t));  
-            rsp.attr_value.handle = param->read.handle;  
-            rsp.attr_value.len = 4;  
-            rsp.attr_value.value[0] = 0xde;  
-            rsp.attr_value.value[1] = 0xed;  
-            rsp.attr_value.value[2] = 0xbe;  
-            rsp.attr_value.value[3] = 0xef;  
-            esp_ble_gatts_send_response(gatts_if,  
-                                      param->read.conn_id,  
-                                      param->read.trans_id,  
-                                      ESP_GATT_OK, &rsp);
             break;
         case ESP_GATTS_WRITE_EVT:
             if (!param->write.is_prep){
